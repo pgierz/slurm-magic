@@ -18,14 +18,9 @@ Suggestions on how to handle the output are welcome --- the raw responses are no
 Installation
 ------------
 
-`slurm-magic` can be installed from this repository via `pip`:
+`slurm-magic` can be installed with `pip`:
 ```bash
-pip install git+https://github.com/NERSC/slurm-magic.git
-```
-`conda` users can include the following in an `environment.yml` file:
-```yaml
-  - pip:
-    - git+https://github.com/NERSC/slurm-magic.git
+pip install slurm-magic
 ```
 
 SLURM Magic Commands
