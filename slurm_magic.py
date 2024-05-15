@@ -2,14 +2,10 @@ from __future__ import print_function
 
 import inspect
 import io
-import sys
 from subprocess import PIPE, Popen
 
 import pandas
-from IPython.core.magic import (Magics, cell_magic, line_cell_magic,
-                                line_magic, magics_class)
-from IPython.core.magic_arguments import (argument, magic_arguments,
-                                          parse_argstring)
+from IPython.core.magic import Magics, line_cell_magic, line_magic, magics_class
 
 
 def modal(func):
