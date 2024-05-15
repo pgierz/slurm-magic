@@ -6,6 +6,7 @@ setup(
     author="Paul Gierz",
     author_email="pgierz@awi.de",
     description="IPython magic for SLURM.",
+    long_description_content_type="text/markdown",
     long_description=README,
     name="slurm-magic",
     py_modules=["slurm_magic"],
