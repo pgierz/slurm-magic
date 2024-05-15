@@ -1,15 +1,15 @@
 from distutils.core import setup
 
-README = open('README.md').read()
+README = open("README.md").read()
 
 setup(
-        author="R. C. Thomas",
-        author_email="rcthomas@lbl.gov",
-        description="IPython magic for SLURM.",
-        long_description=README,
-        name="slurm-magic",
-        py_modules=["slurm_magic"],
-        requires=["ipython"],
-        url="https://github.com/NERSC/slurm-magic",
-        version="0.0.5"
+    author="Paul Gierz",
+    author_email="pgierz@awi.de",
+    description="IPython magic for SLURM.",
+    long_description=README,
+    name="slurm-magic",
+    py_modules=["slurm_magic"],
+    install_requires=["ipython", "pandas"],
+    url="https://github.com/pgierz/slurm-magic",
+    version="0.1.0",
 )

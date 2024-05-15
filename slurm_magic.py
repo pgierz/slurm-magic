@@ -1,34 +1,33 @@
-
 from __future__ import print_function
 
 import inspect
 import io
-from subprocess import (Popen, PIPE)
 import sys
+from subprocess import PIPE, Popen
 
 import pandas
-
-from IPython.core.magic import (Magics, magics_class, line_magic, cell_magic,
-        line_cell_magic)
+from IPython.core.magic import (Magics, cell_magic, line_cell_magic,
+                                line_magic, magics_class)
 from IPython.core.magic_arguments import (argument, magic_arguments,
-        parse_argstring)
+                                          parse_argstring)
 
 
 def modal(func):
     def wrapped_func(obj, line):
         result = func(obj, line)
         if obj._display == "pandas":
-            return pandas.read_table(io.StringIO(result), sep='\s+',
-                    error_bad_lines=False)
+            return pandas.read_table(
+                io.StringIO(result), sep="\s+", on_bad_lines="warn"
+            )
         else:
             return result
+
     wrapped_func.__doc__ = func.__doc__
     return wrapped_func
 
 
 @magics_class
 class SlurmMagics(Magics):
-
     def __init__(self, shell=None, **kwargs):
         super(SlurmMagics, self).__init__(shell, **kwargs)
         self._display = "pandas"
@@ -36,14 +35,14 @@ class SlurmMagics(Magics):
     @line_magic
     def slurm(self, line):
         chunks = line.lower().split()
-        variable, arguments = chunks[ 0 ], chunks[ 1 : ]
-        if variable == "display" :
+        variable, arguments = chunks[0], chunks[1:]
+        if variable == "display":
             return self._configure_display(arguments)
 
     def _configure_display(self, arguments):
         if arguments:
             mode = arguments[0]
-            if mode not in [ "pandas", "raw" ] :
+            if mode not in ["pandas", "raw"]:
                 raise ValueError("Unknown Slurm magics display mode", mode)
             self._display = mode
         return self._display
@@ -79,7 +78,7 @@ class SlurmMagics(Magics):
         if cell is None:
             return self._execute(line)
         else:
-            return self._execute(line, input=cell.encode(encoding='UTF-8'))
+            return self._execute(line, input=cell.encode(encoding="UTF-8"))
 
     @line_magic
     def sbcast(self, line):
